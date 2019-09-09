@@ -29,7 +29,7 @@ project.ext {
     okHttpVersion = "3.12.1"
 
     // Dagger
-    daggerVersion = "2.23.2"
+    daggerVersion = "2.24"
 
     // Lottie
     lottieVersion = "3.0.7"
