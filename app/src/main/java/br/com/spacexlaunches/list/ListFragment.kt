@@ -83,7 +83,8 @@ class ListFragment : BaseFragment() {
             is ListViewState.DefaultLoading -> showDefaultLoading()
             is ListViewState.Error -> showError()
             is ListViewState.Empty -> showEmptyState()
-            is ListViewState.Success -> showList(viewState.launches)
+            is ListViewState.UpdateList -> updateList(viewState.launches)
+            is ListViewState.AppendToList -> appendToList(viewState.newLaunchesToAppend)
         }
     }
 
@@ -108,11 +109,16 @@ class ListFragment : BaseFragment() {
         layoutListStateData.visibility = View.GONE
     }
 
-    private fun showList(launches: List<Launch>) {
+    private fun updateList(launches: List<Launch>) {
         hideLoadings()
         layoutListStateEmpty.visibility = View.GONE
         layoutListStateData.visibility = View.VISIBLE
         adapter.updateAdapter(launches)
+    }
+
+    private fun appendToList(newLaunchesToAppend: List<Launch>) {
+        showToast("New launches")
+        adapter.appendToList(newLaunchesToAppend)
     }
 
     private fun hideLoadings() {

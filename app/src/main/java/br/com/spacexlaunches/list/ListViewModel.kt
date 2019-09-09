@@ -2,6 +2,7 @@ package br.com.spacexlaunches.list
 
 import androidx.lifecycle.*
 import br.com.spacexlaunches.base.api.SpaceXRepository
+import br.com.spacexlaunches.base.api.models.Launch
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -21,37 +22,70 @@ class ListViewModel(
     private val repository: SpaceXRepository
 ) : ViewModel() {
 
-    private var loadingForTheFirstTime = true
     private val listViewState: MutableLiveData<ListViewState> = MutableLiveData()
     private var job: Job? = null
+    private var currentLaunchList: List<Launch> = emptyList()
+
+    private var loadingForTheFirstTime = true
 
     fun getListViewState(): LiveData<ListViewState> = listViewState
 
     fun getAllLaunches() {
         job?.cancel()
         job = viewModelScope.launch {
-            emitLoading()
+            postLoading()
             while (true) {
                 try {
-                    val launches = repository.getAllLaunches()
-                    listViewState.postValue(ListViewState.Success(launches))
+                    handleResult(repository.getAllLaunches())
                 } catch (exception: HttpException) {
-                    listViewState.postValue(ListViewState.Error)
+                    postError()
                 }
                 delay(DELAY_TIME_IN_MILLIS)
             }
         }
     }
 
+    private fun handleResult(newLaunchList: List<Launch>) {
+        when {
+            newLaunchList.isEmpty() -> postEmpty()
+            newLaunchList.size < currentLaunchList.size -> postUpdateToList(newLaunchList)
+            currentLaunchList.isEmpty() -> postUpdateToList(newLaunchList)
+            currentLaunchList != newLaunchList -> postAppendToList(
+                getDifferentElements(newLaunchList).asReversed()
+            )
+        }
+        currentLaunchList = newLaunchList
+    }
+
     // Private methods
 
-    private fun emitLoading() {
+    private fun postLoading() {
         if (loadingForTheFirstTime) {
             loadingForTheFirstTime = false
             listViewState.postValue(ListViewState.FirstTimeLoading)
         } else {
             listViewState.postValue(ListViewState.DefaultLoading)
         }
+    }
+
+    private fun postError() {
+        listViewState.postValue(ListViewState.Error)
+    }
+
+    private fun postEmpty() {
+        listViewState.postValue(ListViewState.Empty)
+    }
+
+    private fun postUpdateToList(newLaunchList: List<Launch>) {
+        listViewState.postValue(ListViewState.UpdateList(newLaunchList.asReversed()))
+    }
+
+    private fun postAppendToList(differentElements: List<Launch>) {
+        listViewState.postValue(ListViewState.AppendToList(differentElements.asReversed()))
+    }
+
+    private fun getDifferentElements(newLaunchList: List<Launch>): List<Launch> {
+        return newLaunchList.toSet().minus(currentLaunchList.toSet()).toList()
     }
 
     companion object {

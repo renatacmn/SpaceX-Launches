@@ -23,13 +23,18 @@ class ListAdapter(
 ) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     private var context: WeakReference<Context?> = WeakReference(context)
-    private var launches: List<Launch> = emptyList()
+    private var launches: MutableList<Launch> = mutableListOf()
 
     // Public methods
 
     fun updateAdapter(launches: List<Launch>) {
-        this.launches = launches
+        this.launches.clear()
+        this.launches.addAll(launches)
         notifyDataSetChanged()
+    }
+
+    fun appendToList(newLaunches: List<Launch>) {
+        this.launches.addAll(0, newLaunches)
     }
 
     // RecyclerView.Adapter overrides

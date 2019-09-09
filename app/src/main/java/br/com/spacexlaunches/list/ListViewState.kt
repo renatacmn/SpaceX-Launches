@@ -12,6 +12,8 @@ sealed class ListViewState {
 
     object Empty : ListViewState()
 
-    class Success(val launches: List<Launch>) : ListViewState()
+    class UpdateList(val launches: List<Launch>) : ListViewState()
+
+    class AppendToList(val newLaunchesToAppend: List<Launch>) : ListViewState()
 
 }
