@@ -32,6 +32,8 @@ class ListFragment : BaseFragment() {
         ViewModelProviders.of(this, viewModelFactory).get(ListViewModel::class.java)
     }
 
+    private lateinit var adapter: ListAdapter
+
     // Lifecycle methods
 
     override fun onAttach(context: Context) {
@@ -48,44 +50,76 @@ class ListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.listViewState.observe(this, Observer(this::updateUi))
+        initializeViewComponents()
+        observeListViewState()
+        viewModel.getAllLaunches()
     }
 
     // Private methods
 
+    private fun initializeViewComponents() {
+        initializeList()
+        initializeSwipeToRefreshLayout()
+    }
+
+    private fun initializeList() {
+        adapter = ListAdapter(context, imageLoader, dateUtil)
+        listLaunches.adapter = adapter
+    }
+
+    private fun initializeSwipeToRefreshLayout() {
+        listSwipeToRefresh.setOnRefreshListener {
+            viewModel.getAllLaunches()
+        }
+    }
+
+    private fun observeListViewState() {
+        viewModel.getListViewState().observe(this, Observer(this::updateUi))
+    }
+
     private fun updateUi(viewState: ListViewState) {
         when (viewState) {
-            is ListViewState.Loading -> showLoading()
+            is ListViewState.FirstTimeLoading -> showFirstTimeLoading()
+            is ListViewState.DefaultLoading -> showDefaultLoading()
             is ListViewState.Error -> showError(viewState.message)
             is ListViewState.Empty -> showEmptyState()
             is ListViewState.Success -> showList(viewState.launches)
         }
     }
 
-    private fun showLoading() {
+    private fun showFirstTimeLoading() {
+        listSwipeToRefresh.isRefreshing = false
         layoutListStateLoading.visibility = View.VISIBLE
-        layoutListStateEmpty.visibility = View.GONE
-        layoutListStateData.visibility = View.GONE
+    }
+
+    private fun showDefaultLoading() {
+        listSwipeToRefresh.isRefreshing = true
+        layoutListStateLoading.visibility = View.GONE
     }
 
     private fun showError(message: String?) {
-        layoutListStateLoading.visibility = View.GONE
+        hideLoadings()
         layoutListStateEmpty.visibility = View.GONE
         layoutListStateData.visibility = View.GONE
         showErrorDialog(message)
     }
 
     private fun showEmptyState() {
-        layoutListStateLoading.visibility = View.GONE
+        hideLoadings()
         layoutListStateEmpty.visibility = View.VISIBLE
         layoutListStateData.visibility = View.GONE
     }
 
     private fun showList(launches: List<Launch>) {
-        layoutListStateLoading.visibility = View.GONE
+        hideLoadings()
         layoutListStateEmpty.visibility = View.GONE
         layoutListStateData.visibility = View.VISIBLE
-        listLaunches.adapter = ListAdapter(context, imageLoader, dateUtil, launches)
+        adapter.updateAdapter(launches)
+    }
+
+    private fun hideLoadings() {
+        listSwipeToRefresh.isRefreshing = false
+        layoutListStateLoading.visibility = View.GONE
     }
 
 }

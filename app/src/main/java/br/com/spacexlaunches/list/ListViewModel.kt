@@ -1,11 +1,8 @@
 package br.com.spacexlaunches.list
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import br.com.spacexlaunches.base.api.SpaceXRepository
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -22,13 +19,32 @@ class ListViewModel(
     private val repository: SpaceXRepository
 ) : ViewModel() {
 
-    val listViewState: LiveData<ListViewState> = liveData(Dispatchers.IO) {
-        try {
-            emit(ListViewState.Loading)
-            val launches = repository.getAllLaunches()
-            emit(ListViewState.Success(launches))
-        } catch (exception: HttpException) {
-            emit(ListViewState.Error(exception.message()))
+    private var loadingForTheFirstTime = true
+
+    private val listViewState: MutableLiveData<ListViewState> = MutableLiveData()
+
+    fun getListViewState(): LiveData<ListViewState> = listViewState
+
+    fun getAllLaunches() {
+        viewModelScope.launch {
+            try {
+                postValueLoading()
+                val launches = repository.getAllLaunches()
+                listViewState.postValue(ListViewState.Success(launches))
+            } catch (exception: HttpException) {
+                listViewState.postValue(ListViewState.Error(exception.message()))
+            }
+        }
+    }
+
+    // Private methods
+
+    private fun postValueLoading() {
+        if (loadingForTheFirstTime) {
+            loadingForTheFirstTime = false
+            listViewState.postValue(ListViewState.FirstTimeLoading)
+        } else {
+            listViewState.postValue(ListViewState.DefaultLoading)
         }
     }
 

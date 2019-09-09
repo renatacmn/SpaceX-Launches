@@ -4,7 +4,9 @@ import br.com.spacexlaunches.base.api.models.Launch
 
 sealed class ListViewState {
 
-    object Loading : ListViewState()
+    object FirstTimeLoading : ListViewState()
+
+    object DefaultLoading : ListViewState()
 
     class Error(val message: String?) : ListViewState()
 

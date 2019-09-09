@@ -19,11 +19,20 @@ import java.lang.ref.WeakReference
 class ListAdapter(
     context: Context?,
     private val imageLoader: ImageLoader,
-    private val dateUtil: DateUtil,
-    private val launches: List<Launch>
+    private val dateUtil: DateUtil
 ) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     private var context: WeakReference<Context?> = WeakReference(context)
+    private var launches: List<Launch> = emptyList()
+
+    // Public methods
+
+    fun updateAdapter(launches: List<Launch>) {
+        this.launches = launches
+        notifyDataSetChanged()
+    }
+
+    // RecyclerView.Adapter overrides
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view = LayoutInflater.from(parent.context)
