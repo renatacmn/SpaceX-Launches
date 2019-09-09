@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SpaceXLaunches</string>
+    <string name="app_name">SpaceX Launches</string>
 
     <!-- Content descriptions -->
     <string name="content_description_launch_image">Launch image</string>

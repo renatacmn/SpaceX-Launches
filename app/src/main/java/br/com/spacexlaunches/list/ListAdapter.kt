@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import br.com.spacexlaunches.R
 import br.com.spacexlaunches.base.api.models.Launch
+import br.com.spacexlaunches.util.DateUtil
 import br.com.spacexlaunches.util.ImageLoader
 import kotlinx.android.synthetic.main.list_item_launch.view.*
 import java.lang.ref.WeakReference
@@ -16,6 +19,7 @@ import java.lang.ref.WeakReference
 class ListAdapter(
     context: Context?,
     private val imageLoader: ImageLoader,
+    private val dateUtil: DateUtil,
     private val launches: List<Launch>
 ) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
@@ -52,22 +56,28 @@ class ListAdapter(
 
     private fun bindStatus(holder: ListViewHolder, launch: Launch) {
         when {
-            launch.upcoming == true -> {
-                holder.textStatus.text =
-                    context.get()?.getString(R.string.list_item_launch_status_upcoming)
-                holder.textStatus.setBackgroundResource(R.drawable.bg_upcoming)
-            }
-            launch.launchSuccess == true -> {
-                holder.textStatus.text =
-                    context.get()?.getString(R.string.list_item_launch_status_success)
-                holder.textStatus.setBackgroundResource(R.drawable.bg_success)
-            }
-            launch.launchSuccess == false -> {
-                holder.textStatus.text =
-                    context.get()?.getString(R.string.list_item_launch_status_failed)
-                holder.textStatus.setBackgroundResource(R.drawable.bg_failed)
-            }
+            launch.upcoming == true -> setStatus(
+                holder,
+                R.string.list_item_launch_status_upcoming,
+                R.drawable.bg_upcoming
+            )
+            launch.launchSuccess == true -> setStatus(
+                holder,
+                R.string.list_item_launch_status_success,
+                R.drawable.bg_success
+            )
+            launch.launchSuccess == false -> setStatus(
+                holder,
+                R.string.list_item_launch_status_failed,
+                R.drawable.bg_failed
+            )
         }
+    }
+
+    private fun setStatus(holder: ListViewHolder, @StringRes statusRes: Int, @DrawableRes statusDrawable: Int) {
+        holder.textStatus.text =
+            context.get()?.getString(statusRes)
+        holder.textStatus.setBackgroundResource(statusDrawable)
     }
 
     private fun bindName(holder: ListViewHolder, launch: Launch) {
@@ -75,7 +85,7 @@ class ListAdapter(
     }
 
     private fun bindDate(holder: ListViewHolder, launch: Launch) {
-        holder.textDate.text = launch.launchDateUtc
+        holder.textDate.text = dateUtil.parseDate(launch.launchDateUtc)
     }
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

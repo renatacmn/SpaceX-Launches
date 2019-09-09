@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import br.com.spacexlaunches.R
 import br.com.spacexlaunches.base.BaseFragment
 import br.com.spacexlaunches.base.api.models.Launch
+import br.com.spacexlaunches.util.DateUtil
 import br.com.spacexlaunches.util.ImageLoader
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_list.*
@@ -20,6 +21,9 @@ class ListFragment : BaseFragment() {
 
     @Inject
     lateinit var imageLoader: ImageLoader
+
+    @Inject
+    lateinit var dateUtil: DateUtil
 
     @Inject
     lateinit var viewModelFactory: ListViewModelFactory
@@ -81,7 +85,7 @@ class ListFragment : BaseFragment() {
         layoutListStateLoading.visibility = View.GONE
         layoutListStateEmpty.visibility = View.GONE
         layoutListStateData.visibility = View.VISIBLE
-        listLaunches.adapter = ListAdapter(context, imageLoader, launches)
+        listLaunches.adapter = ListAdapter(context, imageLoader, dateUtil, launches)
     }
 
 }

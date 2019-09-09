@@ -4,8 +4,6 @@
     <color name="colorPrimaryDark">#07070d</color>
     <color name="colorAccent">#55a7fc</color>
 
-    <color name="transparent_black">#7d000000</color>
-
     <color name="launch_status_success">#53a537</color>
     <color name="launch_status_failed">#cc2815</color>
     <color name="launch_status_upcoming">#4b89c9</color>
