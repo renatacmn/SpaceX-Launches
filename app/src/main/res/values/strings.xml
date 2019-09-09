@@ -4,11 +4,9 @@
     <!-- Content descriptions -->
     <string name="content_description_launch_image">Launch image</string>
 
-    <!-- Error dialog -->
-    <string name="error_dialog_title">Woops!</string>
-
     <!-- ListFragment -->
-    <string name="launch_list_empty_state">No launches found</string>
+    <string name="launch_list_msg_empty_state">No launches found</string>
+    <string name="launch_list_msg_error_state">Error fetching data</string>
 
     <!-- list_item_launch -->
     <string name="list_item_launch_status_upcoming">Upcoming launch</string>

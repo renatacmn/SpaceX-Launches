@@ -2,6 +2,7 @@ package br.com.spacexlaunches.list
 
 import androidx.lifecycle.*
 import br.com.spacexlaunches.base.api.SpaceXRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import javax.inject.Inject
@@ -27,25 +28,32 @@ class ListViewModel(
 
     fun getAllLaunches() {
         viewModelScope.launch {
-            try {
-                postValueLoading()
-                val launches = repository.getAllLaunches()
-                listViewState.postValue(ListViewState.Success(launches))
-            } catch (exception: HttpException) {
-                listViewState.postValue(ListViewState.Error(exception.message()))
+            emitLoading()
+            while (true) {
+                try {
+                    val launches = repository.getAllLaunches()
+                    listViewState.postValue(ListViewState.Success(launches))
+                } catch (exception: HttpException) {
+                    listViewState.postValue(ListViewState.Error)
+                }
+                delay(DELAY_TIME_IN_MILLIS)
             }
         }
     }
 
     // Private methods
 
-    private fun postValueLoading() {
+    private fun emitLoading() {
         if (loadingForTheFirstTime) {
             loadingForTheFirstTime = false
             listViewState.postValue(ListViewState.FirstTimeLoading)
         } else {
             listViewState.postValue(ListViewState.DefaultLoading)
         }
+    }
+
+    companion object {
+        private const val DELAY_TIME_IN_MILLIS: Long = 10000
     }
 
 }

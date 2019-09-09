@@ -8,7 +8,7 @@ sealed class ListViewState {
 
     object DefaultLoading : ListViewState()
 
-    class Error(val message: String?) : ListViewState()
+    object Error : ListViewState()
 
     object Empty : ListViewState()
 

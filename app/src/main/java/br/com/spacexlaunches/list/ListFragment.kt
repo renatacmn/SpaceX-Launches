@@ -81,7 +81,7 @@ class ListFragment : BaseFragment() {
         when (viewState) {
             is ListViewState.FirstTimeLoading -> showFirstTimeLoading()
             is ListViewState.DefaultLoading -> showDefaultLoading()
-            is ListViewState.Error -> showError(viewState.message)
+            is ListViewState.Error -> showError()
             is ListViewState.Empty -> showEmptyState()
             is ListViewState.Success -> showList(viewState.launches)
         }
@@ -97,11 +97,9 @@ class ListFragment : BaseFragment() {
         layoutListStateLoading.visibility = View.GONE
     }
 
-    private fun showError(message: String?) {
+    private fun showError() {
         hideLoadings()
-        layoutListStateEmpty.visibility = View.GONE
-        layoutListStateData.visibility = View.GONE
-        showErrorDialog(message)
+        showToast(getString(R.string.launch_list_msg_error_state))
     }
 
     private fun showEmptyState() {
