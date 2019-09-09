@@ -60,6 +60,7 @@ class ListFragment : BaseFragment() {
     private fun initializeViewComponents() {
         initializeList()
         initializeSwipeToRefreshLayout()
+        initializeBtnNewContent()
     }
 
     private fun initializeList() {
@@ -70,6 +71,12 @@ class ListFragment : BaseFragment() {
     private fun initializeSwipeToRefreshLayout() {
         listSwipeToRefresh.setOnRefreshListener {
             viewModel.getAllLaunches()
+        }
+    }
+
+    private fun initializeBtnNewContent() {
+        listBtnNewContent.setOnClickListener {
+            adapter.notifyDataSetChanged()
         }
     }
 
@@ -111,13 +118,14 @@ class ListFragment : BaseFragment() {
 
     private fun updateList(launches: List<Launch>) {
         hideLoadings()
+        listBtnNewContent.visibility = View.GONE
         layoutListStateEmpty.visibility = View.GONE
         layoutListStateData.visibility = View.VISIBLE
         adapter.updateAdapter(launches)
     }
 
     private fun appendToList(newLaunchesToAppend: List<Launch>) {
-        showToast("New launches")
+        listBtnNewContent.visibility = View.VISIBLE
         adapter.appendToList(newLaunchesToAppend)
     }
 

@@ -2,10 +2,13 @@
 <resources>
     <color name="colorPrimary">#13151c</color>
     <color name="colorPrimaryDark">#07070d</color>
-    <color name="colorAccent">#55a7fc</color>
+    <color name="colorAccent">@color/blue</color>
 
     <color name="launch_status_success">#53a537</color>
     <color name="launch_status_failed">#cc2815</color>
     <color name="launch_status_upcoming">#4b89c9</color>
+
+    <color name="blue">#55a7fc</color>
+    <color name="blue_pressed">#7d55a7fc</color>
 
 </resources>
