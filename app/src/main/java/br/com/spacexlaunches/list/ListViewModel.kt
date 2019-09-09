@@ -2,6 +2,7 @@ package br.com.spacexlaunches.list
 
 import androidx.lifecycle.*
 import br.com.spacexlaunches.base.api.SpaceXRepository
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -21,13 +22,14 @@ class ListViewModel(
 ) : ViewModel() {
 
     private var loadingForTheFirstTime = true
-
     private val listViewState: MutableLiveData<ListViewState> = MutableLiveData()
+    private var job: Job? = null
 
     fun getListViewState(): LiveData<ListViewState> = listViewState
 
     fun getAllLaunches() {
-        viewModelScope.launch {
+        job?.cancel()
+        job = viewModelScope.launch {
             emitLoading()
             while (true) {
                 try {
