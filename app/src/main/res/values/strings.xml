@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SpaceXLaunches</string>
+
+    <!-- Content descriptions -->
+    <string name="content_description_launch_image">Launch image</string>
+
+    <!-- Error dialog -->
+    <string name="error_dialog_title">Woops!</string>
+
+    <!-- ListFragment -->
+    <string name="launch_list_empty_state">No launches found</string>
+
+</resources>

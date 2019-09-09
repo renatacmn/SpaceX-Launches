@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- list_item_launch -->
+    <dimen name="list_item_launch_height">120dp</dimen>
+    <dimen name="list_item_launch_padding">16dp</dimen>
+    <dimen name="list_item_launch_vertical_spacing">4dp</dimen>
+    <dimen name="list_item_name_text_size">18sp</dimen>
+    <dimen name="list_item_date_text_size">13sp</dimen>
+
+</resources>

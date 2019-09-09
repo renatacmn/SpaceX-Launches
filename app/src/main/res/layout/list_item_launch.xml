@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_item_launch_height"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/black">
+
+    <ImageView
+        android:id="@+id/listItemLaunchImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/content_description_launch_image"
+        android:scaleType="centerCrop" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/list_item_launch_padding">
+
+        <TextView
+            android:id="@+id/listItemLaunchTextName"
+            style="@style/TextLaunchName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Launch name"
+            android:layout_marginBottom="@dimen/list_item_launch_vertical_spacing"
+            app:layout_constraintBottom_toTopOf="@id/listItemLaunchTextDate"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/listItemLaunchTextDate"
+            style="@style/TextLaunchDate"
+            tools:text="Launch date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

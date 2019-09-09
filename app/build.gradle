@@ -1,0 +1,73 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: 'dependencies.gradle'
+
+android {
+    compileSdkVersion project.compileSdkVersion
+    defaultConfig {
+        applicationId project.applicationId
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
+        versionCode project.versionCode
+        versionName project.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "SPACEX_BASE_URL", "\"https://api.spacexdata.com/\""
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Androidx
+    implementation "androidx.appcompat:appcompat:$project.appCompatVersion"
+
+    // Google Architecture Components
+    implementation "androidx.lifecycle:lifecycle-extensions:$project.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$project.liveDataVersion"
+
+    // Design
+    implementation "com.google.android.material:material:$project.materialVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$project.constraintLayoutVersion"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$project.navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$project.navigationVersion"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$project.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$project.retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$project.okHttpVersion"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$project.daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$project.daggerVersion"
+
+    // Lottie
+    implementation "com.airbnb.android:lottie:$project.lottieVersion"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$project.glideVersion"
+
+    // Annotation processors
+    kapt "com.google.dagger:dagger-compiler:$project.daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$project.daggerVersion"
+    kapt "com.github.bumptech.glide:compiler:$project.glideVersion"
+
+    // Tests
+    testImplementation "junit:junit:$project.jUnitVersion"
+    androidTestImplementation "androidx.test:runner:$project.testRunnerVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$project.espressoCoreVersion"
+
+}

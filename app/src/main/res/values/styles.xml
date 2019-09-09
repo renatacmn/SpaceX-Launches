@@ -1,0 +1,24 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TextBodyLight" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!-- list_item_launch -->
+    <style name="TextLaunchName" parent="TextBodyLight">
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:textSize">@dimen/list_item_name_text_size</item>
+    </style>
+
+    <style name="TextLaunchDate" parent="TextBodyLight">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textSize">@dimen/list_item_date_text_size</item>
+    </style>
+
+</resources>
