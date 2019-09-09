@@ -10,4 +10,9 @@
     <!-- ListFragment -->
     <string name="launch_list_empty_state">No launches found</string>
 
+    <!-- list_item_launch -->
+    <string name="list_item_launch_status_upcoming">Upcoming launch</string>
+    <string name="list_item_launch_status_success">Launch success</string>
+    <string name="list_item_launch_status_failed">Launch failed</string>
+
 </resources>

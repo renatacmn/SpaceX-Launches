@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import br.com.spacexlaunches.R
+import br.com.spacexlaunches.base.BaseFragment
 import dagger.android.support.AndroidSupportInjection
 
-class DetailFragment : Fragment() {
+class DetailFragment : BaseFragment() {
 
     // Lifecycle methods
 

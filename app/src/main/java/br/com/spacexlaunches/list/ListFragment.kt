@@ -1,15 +1,14 @@
 package br.com.spacexlaunches.list
 
-import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import br.com.spacexlaunches.R
+import br.com.spacexlaunches.base.BaseFragment
 import br.com.spacexlaunches.base.api.models.Launch
 import br.com.spacexlaunches.util.ImageLoader
 import dagger.android.support.AndroidSupportInjection
@@ -17,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.fragment_list_state_data.*
 import javax.inject.Inject
 
-class ListFragment : Fragment() {
+class ListFragment : BaseFragment() {
 
     @Inject
     lateinit var imageLoader: ImageLoader
@@ -82,15 +81,7 @@ class ListFragment : Fragment() {
         layoutListStateLoading.visibility = View.GONE
         layoutListStateEmpty.visibility = View.GONE
         layoutListStateData.visibility = View.VISIBLE
-        listLaunches.adapter = ListAdapter(imageLoader, launches)
-    }
-
-    private fun showErrorDialog(message: String?) {
-        AlertDialog.Builder(context)
-            .setTitle(R.string.error_dialog_title)
-            .setMessage(message)
-            .create()
-            .show()
+        listLaunches.adapter = ListAdapter(context, imageLoader, launches)
     }
 
 }

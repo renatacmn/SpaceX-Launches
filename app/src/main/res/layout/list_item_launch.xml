@@ -1,22 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_launch_height"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/black">
+    android:layout_marginStart="@dimen/list_item_launch_horizontal_margin"
+    android:layout_marginTop="@dimen/list_item_launch_vertical_margin"
+    android:layout_marginEnd="@dimen/list_item_launch_horizontal_margin"
+    android:layout_marginBottom="@dimen/list_item_launch_vertical_margin"
+    app:cardBackgroundColor="@android:color/black"
+    app:cardCornerRadius="@dimen/list_item_launch_card_corner_radius">
 
     <ImageView
         android:id="@+id/listItemLaunchImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/bg_rocket"
         android:contentDescription="@string/content_description_launch_image"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_rocket" />
+
+    <TextView
+        android:id="@+id/listItemLaunchTextStatus"
+        style="@style/TextLaunchStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/list_item_launch_padding"
+        android:padding="@dimen/list_item_launch_status_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@drawable/bg_success"
+        tools:text="Success" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/gradient_list_item_launch"
         android:padding="@dimen/list_item_launch_padding">
 
         <TextView
@@ -24,20 +43,20 @@
             style="@style/TextLaunchName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Launch name"
             android:layout_marginBottom="@dimen/list_item_launch_vertical_spacing"
             app:layout_constraintBottom_toTopOf="@id/listItemLaunchTextDate"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Launch name" />
 
         <TextView
             android:id="@+id/listItemLaunchTextDate"
             style="@style/TextLaunchDate"
-            tools:text="Launch date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Launch date" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+</androidx.cardview.widget.CardView>

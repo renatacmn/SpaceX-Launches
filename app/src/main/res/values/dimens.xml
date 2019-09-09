@@ -2,10 +2,18 @@
 <resources>
 
     <!-- list_item_launch -->
-    <dimen name="list_item_launch_height">180dp</dimen>
+    <dimen name="list_item_launch_card_corner_radius">8dp</dimen>
+    <dimen name="list_item_launch_horizontal_margin">4dp</dimen>
+    <dimen name="list_item_launch_vertical_margin">2dp</dimen>
+    <dimen name="list_item_launch_height">220dp</dimen>
     <dimen name="list_item_launch_padding">16dp</dimen>
     <dimen name="list_item_launch_vertical_spacing">4dp</dimen>
-    <dimen name="list_item_launch_name_text_size">18sp</dimen>
+    <dimen name="list_item_launch_status_padding">2dp</dimen>
+    <dimen name="list_item_launch_name_text_size">20sp</dimen>
     <dimen name="list_item_launch_date_text_size">13sp</dimen>
+    <dimen name="list_item_launch_status_text_size">10sp</dimen>
+
+    <!-- Launch status bg shapes -->
+    <dimen name="launch_status_bg_shape_border_radius">4dp</dimen>
 
 </resources>

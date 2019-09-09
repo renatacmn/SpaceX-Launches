@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -19,6 +19,12 @@
     <style name="TextLaunchDate" parent="TextBodyLight">
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textSize">@dimen/list_item_launch_date_text_size</item>
+    </style>
+
+    <!-- Launch status bg shapes -->
+    <style name="TextLaunchStatus" parent="TextBodyLight">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">@dimen/list_item_launch_status_text_size</item>
     </style>
 
 </resources>
