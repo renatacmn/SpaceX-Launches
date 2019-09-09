@@ -13,12 +13,12 @@
     <!-- list_item_launch -->
     <style name="TextLaunchName" parent="TextBodyLight">
         <item name="android:fontFamily">sans-serif-black</item>
-        <item name="android:textSize">@dimen/list_item_name_text_size</item>
+        <item name="android:textSize">@dimen/list_item_launch_name_text_size</item>
     </style>
 
     <style name="TextLaunchDate" parent="TextBodyLight">
         <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:textSize">@dimen/list_item_date_text_size</item>
+        <item name="android:textSize">@dimen/list_item_launch_date_text_size</item>
     </style>
 
 </resources>

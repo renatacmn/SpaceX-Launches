@@ -1,6 +1,7 @@
 package br.com.spacexlaunches.util
 
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
 
 interface ImageLoader {
 
@@ -8,6 +9,11 @@ interface ImageLoader {
         imageUrl: String,
         imageView: ImageView,
         defaultDrawable: Int? = null
+    )
+
+    fun loadImageFromResource(
+        @DrawableRes drawableRes: Int,
+        imageView: ImageView
     )
 
 }

@@ -24,7 +24,7 @@ class ListViewModel(
 
     val listViewState: LiveData<ListViewState> = liveData(Dispatchers.IO) {
         try {
-
+            emit(ListViewState.Loading)
             val launches = repository.getAllLaunches()
             emit(ListViewState.Success(launches))
         } catch (exception: HttpException) {

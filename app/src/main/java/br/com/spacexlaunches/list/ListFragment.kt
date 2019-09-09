@@ -14,6 +14,7 @@ import br.com.spacexlaunches.base.api.models.Launch
 import br.com.spacexlaunches.util.ImageLoader
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_list.*
+import kotlinx.android.synthetic.main.fragment_list_state_data.*
 import javax.inject.Inject
 
 class ListFragment : Fragment() {
@@ -59,28 +60,28 @@ class ListFragment : Fragment() {
     }
 
     private fun showLoading() {
-        layoutListLoading.visibility = View.VISIBLE
-        layoutListEmptyState.visibility = View.GONE
-        listLaunches.visibility = View.GONE
+        layoutListStateLoading.visibility = View.VISIBLE
+        layoutListStateEmpty.visibility = View.GONE
+        layoutListStateData.visibility = View.GONE
     }
 
     private fun showError(message: String?) {
-        layoutListLoading.visibility = View.GONE
-        layoutListEmptyState.visibility = View.GONE
-        listLaunches.visibility = View.GONE
+        layoutListStateLoading.visibility = View.GONE
+        layoutListStateEmpty.visibility = View.GONE
+        layoutListStateData.visibility = View.GONE
         showErrorDialog(message)
     }
 
     private fun showEmptyState() {
-        layoutListLoading.visibility = View.GONE
-        layoutListEmptyState.visibility = View.VISIBLE
-        listLaunches.visibility = View.GONE
+        layoutListStateLoading.visibility = View.GONE
+        layoutListStateEmpty.visibility = View.VISIBLE
+        layoutListStateData.visibility = View.GONE
     }
 
     private fun showList(launches: List<Launch>) {
-        layoutListLoading.visibility = View.GONE
-        layoutListEmptyState.visibility = View.GONE
-        listLaunches.visibility = View.VISIBLE
+        layoutListStateLoading.visibility = View.GONE
+        layoutListStateEmpty.visibility = View.GONE
+        layoutListStateData.visibility = View.VISIBLE
         listLaunches.adapter = ListAdapter(imageLoader, launches)
     }
 
