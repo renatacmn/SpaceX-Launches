@@ -3,9 +3,7 @@ package br.com.spacexlaunches.list
 import androidx.lifecycle.*
 import br.com.spacexlaunches.base.api.SpaceXRepository
 import br.com.spacexlaunches.base.api.models.Launch
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -32,7 +30,7 @@ class ListViewModel(
 
     fun getAllLaunches() {
         job?.cancel()
-        job = viewModelScope.launch {
+        job = viewModelScope.launch(Dispatchers.IO) {
             postLoading()
             while (true) {
                 try {

@@ -1,7 +1,10 @@
 package br.com.spacexlaunches.base.api.models
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Links(
     @field:Json(name = "article_link")
     val articleLink: String?,
@@ -17,4 +20,4 @@ data class Links(
     val wikipedia: String?,
     @field:Json(name = "youtube_id")
     val youtubeId: String?
-)
+) : Parcelable

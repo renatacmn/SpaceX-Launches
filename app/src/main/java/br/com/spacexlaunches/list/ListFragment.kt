@@ -1,29 +1,24 @@
 package br.com.spacexlaunches.list
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import br.com.spacexlaunches.R
 import br.com.spacexlaunches.base.BaseFragment
 import br.com.spacexlaunches.base.api.models.Launch
-import br.com.spacexlaunches.util.DateUtil
 import br.com.spacexlaunches.util.ImageLoader
-import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.fragment_list_state_data.*
 import javax.inject.Inject
 
-class ListFragment : BaseFragment() {
+class ListFragment : BaseFragment(), ListAdapter.Listener {
 
     @Inject
     lateinit var imageLoader: ImageLoader
-
-    @Inject
-    lateinit var dateUtil: DateUtil
 
     @Inject
     lateinit var viewModelFactory: ListViewModelFactory
@@ -32,14 +27,10 @@ class ListFragment : BaseFragment() {
         ViewModelProviders.of(this, viewModelFactory).get(ListViewModel::class.java)
     }
 
-    private lateinit var adapter: ListAdapter
+    private var observer = Observer(this::updateUi)
+    private var adapter: ListAdapter? = null
 
     // Lifecycle methods
-
-    override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +46,13 @@ class ListFragment : BaseFragment() {
         viewModel.getAllLaunches()
     }
 
+    // ListAdapter.Listener override
+
+    override fun onLaunchClicked(launch: Launch) {
+        val action = ListFragmentDirections.actionListFragmentToDetailFragment(launch)
+        findNavController().navigate(action)
+    }
+
     // Private methods
 
     private fun initializeViewComponents() {
@@ -64,8 +62,10 @@ class ListFragment : BaseFragment() {
     }
 
     private fun initializeList() {
-        adapter = ListAdapter(context, imageLoader, dateUtil)
-        listLaunches.adapter = adapter
+        if (adapter == null) {
+            adapter = ListAdapter(this, imageLoader)
+            listLaunches.adapter = adapter
+        }
     }
 
     private fun initializeSwipeToRefreshLayout() {
@@ -76,12 +76,12 @@ class ListFragment : BaseFragment() {
 
     private fun initializeBtnNewContent() {
         listBtnNewContent.setOnClickListener {
-            adapter.notifyDataSetChanged()
+            adapter?.notifyDataSetChanged()
         }
     }
 
     private fun observeListViewState() {
-        viewModel.getListViewState().observe(this, Observer(this::updateUi))
+        viewModel.getListViewState().observe(this, observer)
     }
 
     private fun updateUi(viewState: ListViewState) {
@@ -121,12 +121,12 @@ class ListFragment : BaseFragment() {
         listBtnNewContent.visibility = View.GONE
         layoutListStateEmpty.visibility = View.GONE
         layoutListStateData.visibility = View.VISIBLE
-        adapter.updateAdapter(launches)
+        adapter?.updateAdapter(launches)
     }
 
     private fun appendToList(newLaunchesToAppend: List<Launch>) {
         listBtnNewContent.visibility = View.VISIBLE
-        adapter.appendToList(newLaunchesToAppend)
+        adapter?.appendToList(newLaunchesToAppend)
     }
 
     private fun hideLoadings() {

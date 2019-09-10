@@ -1,14 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#989898"
+    android:orientation="vertical"
     tools:context=".detail.DetailFragment">
 
-    <TextView
+    <VideoView
+        android:id="@+id/detailsVideoView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Detail fragment" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:padding="@dimen/details_padding">
+
+        <TextView
+            android:id="@+id/detailsTextStatus"
+            style="@style/TextLaunchStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/list_item_launch_status_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/bg_success"
+            tools:text="Success" />
+
+        <TextView
+            android:id="@+id/detailsTextName"
+            style="@style/TextLaunchName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/details_horizontal_spacing"
+            android:layout_marginBottom="@dimen/list_item_launch_vertical_spacing"
+            app:layout_constraintEnd_toStartOf="@id/detailsTextStatus"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Launch name" />
+
+        <TextView
+            android:id="@+id/detailsTextDate"
+            style="@style/TextLaunchDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/details_small_vertical_spacing"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detailsTextName"
+            tools:text="Launch date" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

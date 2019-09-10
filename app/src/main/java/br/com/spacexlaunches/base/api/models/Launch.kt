@@ -1,7 +1,10 @@
 package br.com.spacexlaunches.base.api.models
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Launch(
     @field:Json(name = "details")
     val details: String?,
@@ -21,4 +24,4 @@ data class Launch(
     val rocket: Rocket?,
     @field:Json(name = "upcoming")
     val upcoming: Boolean?
-)
+) : Parcelable
