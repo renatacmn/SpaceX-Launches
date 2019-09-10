@@ -35,7 +35,7 @@
         <item name="android:textSize">@dimen/list_item_launch_date_text_size</item>
     </style>
 
-    <!-- Launch status bg shapes -->
+    <!-- Launch status -->
     <style name="TextLaunchStatus" parent="TextBodyLight">
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textSize">@dimen/list_item_launch_status_text_size</item>

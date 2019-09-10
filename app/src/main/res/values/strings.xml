@@ -4,7 +4,7 @@
     <!-- Content descriptions -->
     <string name="content_description_launch_image">Launch image</string>
 
-    <!-- ListFragment -->
+    <!-- ListActivity -->
     <string name="launch_list_btn_new_content_label">New launches found</string>
     <string name="launch_list_msg_empty_state">No launches found</string>
     <string name="launch_list_msg_error_state">Error fetching data</string>

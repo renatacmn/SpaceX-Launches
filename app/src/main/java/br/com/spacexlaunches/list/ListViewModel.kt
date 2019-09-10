@@ -3,7 +3,10 @@ package br.com.spacexlaunches.list
 import androidx.lifecycle.*
 import br.com.spacexlaunches.base.api.SpaceXRepository
 import br.com.spacexlaunches.base.api.models.Launch
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import javax.inject.Inject
 

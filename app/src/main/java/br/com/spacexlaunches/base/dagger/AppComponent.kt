@@ -2,7 +2,10 @@ package br.com.spacexlaunches.base.dagger
 
 import android.content.Context
 import br.com.spacexlaunches.base.application.SpaceXLaunchesApplication
-import br.com.spacexlaunches.base.dagger.modules.*
+import br.com.spacexlaunches.base.dagger.modules.ActivityBindings
+import br.com.spacexlaunches.base.dagger.modules.AppModule
+import br.com.spacexlaunches.base.dagger.modules.InterfaceBindings
+import br.com.spacexlaunches.base.dagger.modules.NetworkModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -16,7 +19,6 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class,
         NetworkModule::class,
         ActivityBindings::class,
-        FragmentBindings::class,
         InterfaceBindings::class
     ]
 )

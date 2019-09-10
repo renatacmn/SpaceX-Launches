@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'androidx.navigation.safeargs'
 
 apply from: 'dependencies.gradle'
 
@@ -43,15 +42,12 @@ dependencies {
 
     // Google Architecture Components
     implementation "androidx.lifecycle:lifecycle-extensions:$project.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$project.viewModelVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$project.liveDataVersion"
 
     // Design
     implementation "com.google.android.material:material:$project.materialVersion"
     implementation "androidx.constraintlayout:constraintlayout:$project.constraintLayoutVersion"
-
-    // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:$project.navigationVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$project.navigationVersion"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$project.retrofitVersion"
