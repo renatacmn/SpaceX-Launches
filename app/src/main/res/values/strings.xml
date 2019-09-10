@@ -16,6 +16,11 @@
     <string name="list_item_launch_status_failed">Launch failed</string>
 
     <!-- DetailsActivity -->
+    <string name="details_launch_site">Launch site</string>
+    <string name="details_launch_site_name">%1$s - %2$s</string>
+    <string name="details_rocket">Rocket</string>
+    <string name="details_rocket_name">Name: %1$s</string>
+    <string name="details_rocket_type">Type: %1$s</string>
     <string name="details_msg_error_initializing_player">Error initializing Youtube player</string>
 
 </resources>

@@ -8,8 +8,6 @@ import kotlinx.android.parcel.Parcelize
 data class Launch(
     @field:Json(name = "details")
     val details: String?,
-    @field:Json(name = "flight_number")
-    val flightNumber: Int?,
     @field:Json(name = "launch_date_utc")
     val launchDateUtc: String?,
     @field:Json(name = "launch_site")

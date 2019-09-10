@@ -70,8 +70,8 @@ class DetailActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListene
 
     private fun initializeViewComponents() {
         initializeIconBack()
-        initializeLaunchInfo()
         initializeVideoLayout()
+        initializeLaunchInfo()
     }
 
     private fun initializeIconBack() {
@@ -91,11 +91,33 @@ class DetailActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListene
         detailsVideo.initialize(BuildConfig.API_KEY, this)
     }
 
-
     private fun initializeLaunchInfo() {
+        setMissionInfo()
+        setLaunchSiteInfo()
+        setRocketInfo()
+    }
+
+    private fun setMissionInfo() {
         launch?.setLaunchStatusOnTextView(detailsTextStatus)
         detailsTextName.text = launch?.missionName
         launch?.setFormattedDateOnTextView(detailsTextDate)
+    }
+
+    private fun setLaunchSiteInfo() {
+        launch?.launchSite?.let { launchSite ->
+            detailsTextLaunchSiteName.text = getString(
+                R.string.details_launch_site_name,
+                launchSite.siteName,
+                launchSite.siteNameLong
+            )
+        }
+    }
+
+    private fun setRocketInfo() {
+        launch?.rocket?.let { rocket ->
+            detailsTextRocketName.text = getString(R.string.details_rocket_name, rocket.rocketName)
+            detailsTextRocketType.text = getString(R.string.details_rocket_type, rocket.rocketType)
+        }
     }
 
     companion object {

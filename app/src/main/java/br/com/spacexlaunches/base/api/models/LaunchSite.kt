@@ -6,8 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class LaunchSite(
-    @field:Json(name = "site_id")
-    val siteId: String?,
     @field:Json(name = "site_name")
     val siteName: String?,
     @field:Json(name = "site_name_long")

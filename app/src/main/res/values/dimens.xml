@@ -19,7 +19,7 @@
     <dimen name="list_item_launch_vertical_spacing">4dp</dimen>
     <dimen name="list_item_launch_status_padding">2dp</dimen>
     <dimen name="list_item_launch_name_text_size">20sp</dimen>
-    <dimen name="list_item_launch_date_text_size">13sp</dimen>
+    <dimen name="list_item_launch_date_text_size">12sp</dimen>
     <dimen name="list_item_launch_status_text_size">10sp</dimen>
 
     <!-- Launch status bg shapes -->
@@ -29,6 +29,6 @@
     <dimen name="details_padding">16dp</dimen>
     <dimen name="details_horizontal_spacing">16dp</dimen>
     <dimen name="details_small_vertical_spacing">4dp</dimen>
-
+    <dimen name="details_vertical_spacing">16dp</dimen>
 
 </resources>

@@ -83,6 +83,54 @@
             app:layout_constraintTop_toBottomOf="@id/detailsTextName"
             tools:text="Launch date" />
 
+        <TextView
+            android:id="@+id/detailsTextLaunchSite"
+            style="@style/SectionTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/details_vertical_spacing"
+            android:text="@string/details_launch_site"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detailsTextDate" />
+
+        <TextView
+            android:id="@+id/detailsTextLaunchSiteName"
+            style="@style/TextBodyLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/details_launch_site_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detailsTextLaunchSite" />
+
+        <TextView
+            android:id="@+id/detailsTextRocket"
+            style="@style/SectionTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/details_vertical_spacing"
+            android:text="@string/details_rocket"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detailsTextLaunchSiteName" />
+
+        <TextView
+            android:id="@+id/detailsTextRocketName"
+            style="@style/TextBodyLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/details_rocket_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detailsTextRocket" />
+
+        <TextView
+            android:id="@+id/detailsTextRocketType"
+            style="@style/TextBodyLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/details_rocket_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detailsTextRocketName" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

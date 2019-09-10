@@ -9,6 +9,7 @@
     <!-- Text -->
     <style name="TextBodyLight" parent="TextAppearance.AppCompat.Body1">
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
     <!-- Button -->
@@ -36,7 +37,6 @@
     </style>
 
     <style name="TextLaunchDate" parent="TextBodyLight">
-        <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textSize">@dimen/list_item_launch_date_text_size</item>
     </style>
 
@@ -44,6 +44,11 @@
     <style name="TextLaunchStatus" parent="TextBodyLight">
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textSize">@dimen/list_item_launch_status_text_size</item>
+    </style>
+
+    <!-- DetailActivity -->
+    <style name="SectionTitleText" parent="TextBodyLight">
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
 </resources>
