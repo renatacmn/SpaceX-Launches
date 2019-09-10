@@ -10,6 +10,7 @@ import br.com.spacexlaunches.R
 import br.com.spacexlaunches.base.api.models.Launch
 import br.com.spacexlaunches.util.ImageLoader
 import br.com.spacexlaunches.util.setFormattedDateOnTextView
+import br.com.spacexlaunches.util.setLaunchImageOrDefault
 import br.com.spacexlaunches.util.setLaunchStatusOnTextView
 import kotlinx.android.synthetic.main.list_item_launch.view.*
 
@@ -60,14 +61,7 @@ class ListAdapter(
     }
 
     private fun bindBg(holder: ListViewHolder, launch: Launch) {
-        val images = launch.links?.flickrImages
-        if (images.isNullOrEmpty().not() && images?.get(0).isNullOrBlank().not()) {
-            images?.get(0)?.let { firstImageUrl ->
-                imageLoader.loadImageFromUrl(firstImageUrl, holder.imageBg, R.drawable.bg_rocket)
-            }
-        } else {
-            imageLoader.loadImageFromResource(R.drawable.bg_rocket, holder.imageBg)
-        }
+        launch.setLaunchImageOrDefault(imageLoader, holder.imageBg)
     }
 
     private fun bindStatus(holder: ListViewHolder, launch: Launch) {

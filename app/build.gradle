@@ -15,6 +15,7 @@ android {
         versionName project.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "SPACEX_BASE_URL", "\"https://api.spacexdata.com/\""
+        buildConfigField "String", "API_KEY", "\"AIzaSyAuA79foVuGeIXTll6nyypUMbyiOgpp338\""
     }
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
@@ -32,7 +33,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -73,5 +74,5 @@ dependencies {
     testImplementation "junit:junit:$project.jUnitVersion"
     androidTestImplementation "androidx.test:runner:$project.testRunnerVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$project.espressoCoreVersion"
-
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 }

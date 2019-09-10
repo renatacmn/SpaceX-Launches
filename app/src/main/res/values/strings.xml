@@ -14,4 +14,7 @@
     <string name="list_item_launch_status_success">Launch success</string>
     <string name="list_item_launch_status_failed">Launch failed</string>
 
+    <!-- DetailsActivity -->
+    <string name="details_msg_error_initializing_player">Error initializing Youtube player</string>
+
 </resources>
