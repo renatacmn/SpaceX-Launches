@@ -54,6 +54,7 @@ class ListViewModel(
             currentLaunchList != newLaunchList -> postAppendToList(
                 getDifferentElements(newLaunchList).asReversed()
             )
+            else -> postHideLoading()
         }
         currentLaunchList = newLaunchList
     }
@@ -67,6 +68,10 @@ class ListViewModel(
         } else {
             listViewState.postValue(ListViewState.DefaultLoading)
         }
+    }
+
+    private fun postHideLoading() {
+        listViewState.postValue(ListViewState.HideLoading)
     }
 
     private fun postError() {

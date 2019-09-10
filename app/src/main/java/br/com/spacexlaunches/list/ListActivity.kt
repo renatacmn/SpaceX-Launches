@@ -78,6 +78,7 @@ class ListActivity : BaseActivity(), ListAdapter.Listener {
         when (viewState) {
             is ListViewState.FirstTimeLoading -> showFirstTimeLoading()
             is ListViewState.DefaultLoading -> showDefaultLoading()
+            is ListViewState.HideLoading -> hideLoadings()
             is ListViewState.Error -> showError()
             is ListViewState.Empty -> showEmptyState()
             is ListViewState.UpdateList -> updateList(viewState.launches)
@@ -115,6 +116,7 @@ class ListActivity : BaseActivity(), ListAdapter.Listener {
     }
 
     private fun appendToList(newLaunchesToAppend: List<Launch>) {
+        hideLoadings()
         listBtnNewContent.visibility = View.VISIBLE
         adapter?.appendToList(newLaunchesToAppend)
     }

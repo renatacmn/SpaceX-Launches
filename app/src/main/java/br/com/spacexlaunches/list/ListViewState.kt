@@ -8,6 +8,8 @@ sealed class ListViewState {
 
     object DefaultLoading : ListViewState()
 
+    object HideLoading : ListViewState()
+
     object Error : ListViewState()
 
     object Empty : ListViewState()
