@@ -3,6 +3,7 @@
 
     <!-- Content descriptions -->
     <string name="content_description_launch_image">Launch image</string>
+    <string name="content_description_ic_arrow_back">Back</string>
 
     <!-- ListActivity -->
     <string name="launch_list_btn_new_content_label">New launches found</string>

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!-- CustomButton -->
     <dimen name="custom_button_corner_radius">24dp</dimen>
     <dimen name="custom_button_internal_padding">16dp</dimen>
+
+    <!-- Icon -->
+    <dimen name="icon_internal_padding">16dp</dimen>
 
     <!-- ListActivity -->
     <dimen name="list_btn_new_content_margin">16dp</dimen>

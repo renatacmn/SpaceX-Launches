@@ -69,14 +69,13 @@ class DetailActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListene
     }
 
     private fun initializeViewComponents() {
+        initializeIconBack()
         initializeLaunchInfo()
         initializeVideoLayout()
     }
 
-    private fun initializeLaunchInfo() {
-        launch?.setLaunchStatusOnTextView(detailsTextStatus)
-        detailsTextName.text = launch?.missionName
-        launch?.setFormattedDateOnTextView(detailsTextDate)
+    private fun initializeIconBack() {
+        detailsIcBack.setOnClickListener { onBackPressed() }
     }
 
     private fun initializeVideoLayout() {
@@ -90,6 +89,13 @@ class DetailActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListene
 
     private fun initializeVideoView() {
         detailsVideo.initialize(BuildConfig.API_KEY, this)
+    }
+
+
+    private fun initializeLaunchInfo() {
+        launch?.setLaunchStatusOnTextView(detailsTextStatus)
+        detailsTextName.text = launch?.missionName
+        launch?.setFormattedDateOnTextView(detailsTextDate)
     }
 
     companion object {
