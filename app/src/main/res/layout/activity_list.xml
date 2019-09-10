@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/layoutListStateLoading"
-        layout="@layout/fragment_list_state_loading"
+        layout="@layout/activity_list_state_loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
@@ -14,7 +14,7 @@
 
     <include
         android:id="@+id/layoutListStateEmpty"
-        layout="@layout/fragment_list_state_empty"
+        layout="@layout/activity_list_state_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
@@ -22,7 +22,7 @@
 
     <include
         android:id="@+id/layoutListStateData"
-        layout="@layout/fragment_list_state_data"
+        layout="@layout/activity_list_state_data"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"

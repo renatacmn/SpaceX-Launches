@@ -4,14 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".detail.DetailFragment">
+    android:orientation="vertical">
 
-    <VideoView
-        android:id="@+id/detailsVideoView"
+    <FrameLayout
+        android:id="@+id/detailsLayoutVideo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/detailsLaunchImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/content_description_launch_image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_rocket" />
+
+        <com.google.android.youtube.player.YouTubePlayerView
+            android:id="@+id/detailsVideo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

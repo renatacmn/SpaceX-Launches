@@ -1,6 +1,7 @@
 package br.com.spacexlaunches.util
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import br.com.spacexlaunches.R
 import br.com.spacexlaunches.base.api.models.Launch
@@ -45,5 +46,16 @@ fun Launch.setFormattedDateOnTextView(textView: TextView) {
         textView.text = outputDateFormat.format(date)
     } catch (exception: ParseException) {
         textView.text = launchDateUtc
+    }
+}
+
+fun Launch.setLaunchImageOrDefault(imageLoader: ImageLoader, imageView: ImageView) {
+    val images = links?.flickrImages
+    if (images.isNullOrEmpty().not() && images?.get(0).isNullOrBlank().not()) {
+        images?.get(0)?.let { firstImageUrl ->
+            imageLoader.loadImageFromUrl(firstImageUrl, imageView, R.drawable.bg_rocket)
+        }
+    } else {
+        imageLoader.loadImageFromResource(R.drawable.bg_rocket, imageView)
     }
 }

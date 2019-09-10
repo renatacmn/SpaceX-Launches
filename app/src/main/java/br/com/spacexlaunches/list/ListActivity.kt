@@ -1,21 +1,19 @@
 package br.com.spacexlaunches.list
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import br.com.spacexlaunches.R
-import br.com.spacexlaunches.base.BaseFragment
+import br.com.spacexlaunches.base.BaseActivity
 import br.com.spacexlaunches.base.api.models.Launch
+import br.com.spacexlaunches.detail.DetailActivity
 import br.com.spacexlaunches.util.ImageLoader
-import kotlinx.android.synthetic.main.fragment_list.*
-import kotlinx.android.synthetic.main.fragment_list_state_data.*
+import kotlinx.android.synthetic.main.activity_list.*
+import kotlinx.android.synthetic.main.activity_list_state_data.*
 import javax.inject.Inject
 
-class ListFragment : BaseFragment(), ListAdapter.Listener {
+class ListActivity : BaseActivity(), ListAdapter.Listener {
 
     @Inject
     lateinit var imageLoader: ImageLoader
@@ -27,20 +25,13 @@ class ListFragment : BaseFragment(), ListAdapter.Listener {
         ViewModelProviders.of(this, viewModelFactory).get(ListViewModel::class.java)
     }
 
-    private var observer = Observer(this::updateUi)
     private var adapter: ListAdapter? = null
 
     // Lifecycle methods
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_list, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_list)
         initializeViewComponents()
         observeListViewState()
         viewModel.getAllLaunches()
@@ -49,8 +40,7 @@ class ListFragment : BaseFragment(), ListAdapter.Listener {
     // ListAdapter.Listener override
 
     override fun onLaunchClicked(launch: Launch) {
-        val action = ListFragmentDirections.actionListFragmentToDetailFragment(launch)
-        findNavController().navigate(action)
+        DetailActivity.start(this, launch)
     }
 
     // Private methods
@@ -81,7 +71,7 @@ class ListFragment : BaseFragment(), ListAdapter.Listener {
     }
 
     private fun observeListViewState() {
-        viewModel.getListViewState().observe(this, observer)
+        viewModel.getListViewState().observe(this, Observer(this::updateUi))
     }
 
     private fun updateUi(viewState: ListViewState) {
