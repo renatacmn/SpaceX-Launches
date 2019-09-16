@@ -16,17 +16,22 @@ import br.com.spacexlaunches.util.setLaunchStatusOnTextView
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_detail.*
+import javax.inject.Inject
 
 class DetailActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener {
 
-    private val imageLoader = GlideImageLoader(this)
+    @Inject
+    lateinit var imageLoader: GlideImageLoader
+
     private var launch: Launch? = null
 
     // Lifecycle methods
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AndroidInjection.inject(this)
         setContentView(R.layout.activity_detail)
         getExtras()
         initializeViewComponents()
@@ -125,7 +130,10 @@ class DetailActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListene
 
         fun start(context: Context, launch: Launch) {
             val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra(PARAM_LAUNCH, launch)
+            val extras = Bundle().apply {
+                putParcelable(PARAM_LAUNCH, launch)
+            }
+            intent.putExtras(extras)
             context.startActivity(intent)
         }
     }

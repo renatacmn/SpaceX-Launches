@@ -1,22 +1,18 @@
 package br.com.spacexlaunches.util
 
-import android.content.Context
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import javax.inject.Inject
 
-class GlideImageLoader @Inject constructor(
-    private val context: Context
-) : ImageLoader {
+class GlideImageLoader : ImageLoader {
 
     override fun loadImageFromUrl(
         imageUrl: String,
         imageView: ImageView,
         defaultDrawable: Int?
     ) {
-        Glide.with(context)
+        Glide.with(imageView.context)
             .load(imageUrl)
             .thumbnail(.1f)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -27,7 +23,7 @@ class GlideImageLoader @Inject constructor(
         @DrawableRes drawableRes: Int,
         imageView: ImageView
     ) {
-        Glide.with(context)
+        Glide.with(imageView.context)
             .load(drawableRes)
             .into(imageView)
     }
