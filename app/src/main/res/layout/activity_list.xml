@@ -21,6 +21,14 @@
         tools:visibility="visible" />
 
     <include
+        android:id="@+id/layoutListStateError"
+        layout="@layout/activity_list_state_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <include
         android:id="@+id/layoutListStateData"
         layout="@layout/activity_list_state_data"
         android:layout_width="match_parent"

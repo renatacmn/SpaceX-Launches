@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/list_margin">
+
+    <TextView
+        android:id="@+id/errorTextMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/list_vertical_spacing"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@id/errorIcRefresh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Error message" />
+
+    <ImageView
+        android:id="@+id/errorIcRefresh"
+        style="@style/ImageViewIcon"
+        android:layout_width="@dimen/list_ic_refresh_size"
+        android:layout_height="@dimen/list_ic_refresh_size"
+        android:contentDescription="@string/content_description_ic_refresh"
+        android:src="@drawable/ic_refresh"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/errorTextMessage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

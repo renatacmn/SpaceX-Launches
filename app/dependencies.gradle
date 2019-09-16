@@ -11,7 +11,7 @@ project.ext {
     /* Dependencies */
 
     // Android
-    appCompatVersion = "1.0.2"
+    appCompatVersion = "1.1.0"
 
     // Google Architecture Components
     lifecycleVersion = "2.1.0"

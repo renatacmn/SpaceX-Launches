@@ -8,7 +8,9 @@
     <dimen name="icon_internal_padding">16dp</dimen>
 
     <!-- ListActivity -->
-    <dimen name="list_btn_new_content_margin">16dp</dimen>
+    <dimen name="list_margin">16dp</dimen>
+    <dimen name="list_vertical_spacing">16dp</dimen>
+    <dimen name="list_ic_refresh_size">60dp</dimen>
 
     <!-- list_item_launch -->
     <dimen name="list_item_launch_card_corner_radius">8dp</dimen>

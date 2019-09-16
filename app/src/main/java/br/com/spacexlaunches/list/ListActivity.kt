@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import br.com.spacexlaunches.BuildConfig.DEBUG
 import br.com.spacexlaunches.R
 import br.com.spacexlaunches.base.BaseActivity
 import br.com.spacexlaunches.base.api.models.Launch
@@ -11,6 +12,7 @@ import br.com.spacexlaunches.detail.DetailActivity
 import br.com.spacexlaunches.util.ImageLoader
 import kotlinx.android.synthetic.main.activity_list.*
 import kotlinx.android.synthetic.main.activity_list_state_data.*
+import kotlinx.android.synthetic.main.activity_list_state_error.*
 import javax.inject.Inject
 
 class ListActivity : BaseActivity(), ListAdapter.Listener {
@@ -49,6 +51,7 @@ class ListActivity : BaseActivity(), ListAdapter.Listener {
         initializeList()
         initializeSwipeToRefreshLayout()
         initializeBtnNewContent()
+        initializeBtnRefresh()
     }
 
     private fun initializeList() {
@@ -67,7 +70,13 @@ class ListActivity : BaseActivity(), ListAdapter.Listener {
     private fun initializeBtnNewContent() {
         listBtnNewContent.setOnClickListener {
             adapter?.notifyDataSetChanged()
+            listLaunches.smoothScrollToPosition(0)
+            listBtnNewContent.visibility = View.GONE
         }
+    }
+
+    private fun initializeBtnRefresh() {
+        errorIcRefresh.setOnClickListener { viewModel.getAllLaunches() }
     }
 
     private fun observeListViewState() {
@@ -79,7 +88,8 @@ class ListActivity : BaseActivity(), ListAdapter.Listener {
             is ListViewState.FirstTimeLoading -> showFirstTimeLoading()
             is ListViewState.DefaultLoading -> showDefaultLoading()
             is ListViewState.HideLoading -> hideLoadings()
-            is ListViewState.Error -> showError()
+            is ListViewState.FirstTimeError -> showError(true, viewState.exception)
+            is ListViewState.DefaultError -> showError(false)
             is ListViewState.Empty -> showEmptyState()
             is ListViewState.UpdateList -> updateList(viewState.launches)
             is ListViewState.AppendToList -> appendToList(viewState.newLaunchesToAppend)
@@ -96,14 +106,24 @@ class ListActivity : BaseActivity(), ListAdapter.Listener {
         layoutListStateLoading.visibility = View.GONE
     }
 
-    private fun showError() {
+    private fun showError(firstTimeError: Boolean, exception: Exception? = null) {
         hideLoadings()
-        showToast(getString(R.string.launch_list_msg_error_state))
+        if (firstTimeError) {
+            layoutListStateEmpty.visibility = View.GONE
+            layoutListStateError.visibility = View.VISIBLE
+            layoutListStateData.visibility = View.GONE
+            val errorMessage =
+                if (DEBUG) exception?.message else getString(R.string.launch_list_msg_error_state)
+            errorTextMessage.text = errorMessage
+        } else {
+            if (DEBUG) showToast(getString(R.string.launch_list_msg_error_state))
+        }
     }
 
     private fun showEmptyState() {
         hideLoadings()
         layoutListStateEmpty.visibility = View.VISIBLE
+        layoutListStateError.visibility = View.GONE
         layoutListStateData.visibility = View.GONE
     }
 
@@ -111,6 +131,7 @@ class ListActivity : BaseActivity(), ListAdapter.Listener {
         hideLoadings()
         listBtnNewContent.visibility = View.GONE
         layoutListStateEmpty.visibility = View.GONE
+        layoutListStateError.visibility = View.GONE
         layoutListStateData.visibility = View.VISIBLE
         adapter?.updateAdapter(launches)
     }

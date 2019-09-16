@@ -4,11 +4,12 @@
     <!-- Content descriptions -->
     <string name="content_description_launch_image">Launch image</string>
     <string name="content_description_ic_arrow_back">Back</string>
+    <string name="content_description_ic_refresh">Refresh</string>
 
     <!-- ListActivity -->
     <string name="launch_list_btn_new_content_label">New launches found</string>
     <string name="launch_list_msg_empty_state">No launches found</string>
-    <string name="launch_list_msg_error_state">Error fetching data</string>
+    <string name="launch_list_msg_error_state">Error fetching new data</string>
 
     <!-- list_item_launch -->
     <string name="list_item_launch_status_upcoming">Upcoming launch</string>

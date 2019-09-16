@@ -7,7 +7,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
 import javax.inject.Inject
 
 class ListViewModelFactory @Inject constructor(
@@ -26,7 +25,6 @@ class ListViewModel(
     private val listViewState: MutableLiveData<ListViewState> = MutableLiveData()
     private var job: Job? = null
     private var currentLaunchList: List<Launch> = emptyList()
-
     private var loadingForTheFirstTime = true
 
     fun getListViewState(): LiveData<ListViewState> = listViewState
@@ -38,8 +36,8 @@ class ListViewModel(
             while (true) {
                 try {
                     handleResult(repository.getAllLaunches())
-                } catch (exception: HttpException) {
-                    postError()
+                } catch (exception: Exception) {
+                    postError(exception)
                 }
                 delay(DELAY_TIME_IN_MILLIS)
             }
@@ -74,8 +72,13 @@ class ListViewModel(
         listViewState.postValue(ListViewState.HideLoading)
     }
 
-    private fun postError() {
-        listViewState.postValue(ListViewState.Error)
+    private fun postError(exception: Exception) {
+        if (currentLaunchList.isEmpty()) {
+            job?.cancel()
+            listViewState.postValue(ListViewState.FirstTimeError(exception))
+        } else {
+            listViewState.postValue(ListViewState.DefaultError)
+        }
     }
 
     private fun postEmpty() {

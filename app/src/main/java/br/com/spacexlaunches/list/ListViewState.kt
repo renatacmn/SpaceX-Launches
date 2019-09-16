@@ -10,7 +10,9 @@ sealed class ListViewState {
 
     object HideLoading : ListViewState()
 
-    object Error : ListViewState()
+    class FirstTimeError(val exception: Exception) : ListViewState()
+
+    object DefaultError : ListViewState()
 
     object Empty : ListViewState()
 
